@@ -20,13 +20,19 @@ export const extractJobDetails = async (req, res) => {
     // Upload to Cloudinary
     const { url, publicId } = await uploadToCloudinary(compressedBuffer);
 
-    // Extract details using Gemini Vision
-    const extractionResult = await extractJobDetailsFromImage(compressedBuffer);
+    // Try extracting details using Gemini Vision. If Gemini fails, don't return 500 — return upload info and indicate extraction failed.
+    let extractionResult = { success: false, data: null, confidence: 0 };
+    try {
+      extractionResult = await extractJobDetailsFromImage(compressedBuffer);
+    } catch (err) {
+      console.error('Gemini extraction failed:', err?.message || err);
+      extractionResult = { success: false, data: null, confidence: 0 };
+    }
 
     res.status(200).json({
       success: true,
-      message: extractionResult.success 
-        ? 'Job details extracted successfully' 
+      message: extractionResult.success
+        ? 'Job details extracted successfully'
         : 'Image uploaded but extraction failed. Please fill details manually.',
       data: {
         imageUrl: url,
@@ -145,7 +151,12 @@ export const getAllJobs = async (req, res) => {
 // @access  Public
 export const getJobById = async (req, res) => {
   try {
-    const job = await Job.findById(req.params.id).select('-imagePublicId');
+    // Increment views atomically to avoid triggering validation on save
+    const job = await Job.findByIdAndUpdate(
+      req.params.id,
+      { $inc: { views: 1 } },
+      { new: true }
+    ).select('-imagePublicId').lean();
 
     if (!job) {
       return res.status(404).json({
@@ -153,10 +164,6 @@ export const getJobById = async (req, res) => {
         message: 'Job not found'
       });
     }
-
-    // Increment views
-    job.views += 1;
-    await job.save();
 
     res.status(200).json({
       success: true,
@@ -186,13 +193,20 @@ export const updateJob = async (req, res) => {
       });
     }
 
-    // Update job
+    // Prepare update data and avoid setting empty imageUrl which would fail validation
+    const updateData = { ...req.body };
+    if (updateData.imageUrl !== undefined && updateData.imageUrl !== null) {
+      if (typeof updateData.imageUrl === 'string' && updateData.imageUrl.trim() === '') {
+        delete updateData.imageUrl; // keep existing image
+      }
+    }
+
     job = await Job.findByIdAndUpdate(
       req.params.id,
-      req.body,
+      updateData,
       {
         new: true,
-        runValidators: false
+        runValidators: true
       }
     );
 

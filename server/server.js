@@ -20,6 +20,10 @@ connectDB();
 // Initialize express app
 const app = express();
 
+// When running behind a proxy (Render, Heroku, etc.) enable trust proxy
+// so express-rate-limit can use the correct IP from X-Forwarded-For
+app.set('trust proxy', 1);
+
 // Security middleware
 app.use(securityHeaders);
 app.use(sanitizeData);
