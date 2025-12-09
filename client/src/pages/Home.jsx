@@ -58,12 +58,17 @@ const Home = () => {
       </header>
 
       <main className="container">
-        <Filters onFilterChange={handleFilterChange} filters={filters} />
-
-        {/* AdSense Placeholder - Top Banner */}
-        <div className="ad-placeholder ad-banner">
-          <p>Advertisement Space (728x90)</p>
+        {/* Warning Alerts */}
+        <div className="alerts-container">
+          <div className="alert alert-warning">
+            <strong>⚠️ Important Notice:</strong> These job posts are from public resources. Please verify all information and company details before applying.
+          </div>
+          <div className="alert alert-danger">
+            <strong>🚨 Beware of Scams:</strong> Never pay money to any recruiter or company for job placement. Legitimate companies never charge application fees.
+          </div>
         </div>
+
+        <Filters onFilterChange={handleFilterChange} filters={filters} />
 
         {isLoading ? (
           <div className="loading-container">
@@ -91,16 +96,8 @@ const Home = () => {
             ) : (
               <>
                 <div className="jobs-grid">
-                  {data?.data.map((job, index) => (
-                    <div key={job._id}>
-                      <JobCard job={job} />
-                      {/* AdSense Placeholder - In-feed ads (every 4 jobs) */}
-                      {(index + 1) % 4 === 0 && index !== data.data.length - 1 && (
-                        <div className="ad-placeholder ad-infeed">
-                          <p>Advertisement Space (300x250)</p>
-                        </div>
-                      )}
-                    </div>
+                  {data?.data.map((job) => (
+                    <JobCard key={job._id} job={job} />
                   ))}
                 </div>
 
@@ -113,11 +110,6 @@ const Home = () => {
             )}
           </>
         )}
-
-        {/* AdSense Placeholder - Bottom Banner */}
-        <div className="ad-placeholder ad-banner">
-          <p>Advertisement Space (728x90)</p>
-        </div>
       </main>
 
       <footer className="footer">

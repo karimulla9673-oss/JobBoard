@@ -67,6 +67,16 @@ const JobDetails = () => {
           <FiArrowLeft /> Back to Jobs
         </Link>
 
+        {/* Warning Alerts */}
+        <div className="alerts-container">
+          <div className="alert alert-warning">
+            <strong>⚠️ Important Notice:</strong> These job posts are from public resources. Please verify all information and company details before applying.
+          </div>
+          <div className="alert alert-danger">
+            <strong>🚨 Beware of Scams:</strong> Never pay money to any recruiter or company for job placement. Legitimate companies never charge application fees.
+          </div>
+        </div>
+
         <div className="job-details-card">
           <div className="job-details-header">
             <div className="job-image-large">
@@ -107,11 +117,6 @@ const JobDetails = () => {
                 </button>
               )}
             </div>
-          </div>
-
-          {/* AdSense Placeholder */}
-          <div className="ad-placeholder ad-banner">
-            <p>Advertisement Space (728x90)</p>
           </div>
 
           <div className="job-details-content">
@@ -174,11 +179,6 @@ const JobDetails = () => {
                 </button>
               </div>
             )}
-          </div>
-
-          {/* AdSense Placeholder */}
-          <div className="ad-placeholder ad-rectangle">
-            <p>Advertisement Space (300x600)</p>
           </div>
         </div>
       </div>
