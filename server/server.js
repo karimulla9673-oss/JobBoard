@@ -29,8 +29,8 @@ const corsOptions = {
   origin: [
     process.env.CLIENT_URL,
     process.env.ADMIN_URL,
-    'http://localhost:5173',
-    'http://localhost:5174'
+    'https://jobboard-client-7n25.onrender.com',
+    'https://jobboardowner.onrender.com'
   ],
   credentials: true,
   optionsSuccessStatus: 200
