@@ -3,24 +3,28 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
+  
+  base: "/", // <<<<< THIS IS REQUIRED FOR HOSTING
+
   server: {
     port: 5173,
     proxy: {
       '/api': {
         target: 'http://localhost:5000',
-        changeOrigin: true
-      }
-    }
+        changeOrigin: true,
+      },
+    },
   },
+
   build: {
     outDir: 'dist',
     sourcemap: false,
     rollupOptions: {
       output: {
         manualChunks: {
-          vendor: ['react', 'react-dom', 'react-router-dom']
-        }
-      }
-    }
-  }
+          vendor: ['react', 'react-dom', 'react-router-dom'],
+        },
+      },
+    },
+  },
 });
