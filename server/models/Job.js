@@ -67,6 +67,16 @@ const jobSchema = new mongoose.Schema({
     trim: true,
     maxlength: [2000, 'Description cannot exceed 2000 characters']
   },
+  rolesResponsibilities: {
+    type: String,
+    trim: true,
+    maxlength: [2000, 'Roles & Responsibilities cannot exceed 2000 characters']
+  },
+  eligibility: {
+    type: String,
+    trim: true,
+    maxlength: [2000, 'Eligibility cannot exceed 2000 characters']
+  },
   isActive: {
     type: Boolean,
     default: true

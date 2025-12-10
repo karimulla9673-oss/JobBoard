@@ -68,6 +68,8 @@ export const createJob = async (req, res) => {
       imageUrl: req.body.imageUrl,
       imagePublicId: req.body.imagePublicId,
       description: req.body.description,
+      rolesResponsibilities: req.body.rolesResponsibilities,
+      eligibility: req.body.eligibility,
       postedDate: req.body.postedDate || new Date()
     };
 

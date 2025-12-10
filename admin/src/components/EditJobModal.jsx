@@ -17,6 +17,8 @@ const EditJobModal = ({ job, onClose }) => {
     contactNumber: job.contactNumber || '',
     applyLink: job.applyLink || '',
     description: job.description || '',
+    rolesResponsibilities: job.rolesResponsibilities || '',
+    eligibility: job.eligibility || '',
     postedDate: new Date(job.postedDate).toISOString().split('T')[0],
   });
 
@@ -170,6 +172,30 @@ const EditJobModal = ({ job, onClose }) => {
                 value={formData.description}
                 onChange={handleChange}
                 rows="3"
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="rolesResponsibilities">Roles & Responsibilities</label>
+              <textarea
+                id="rolesResponsibilities"
+                name="rolesResponsibilities"
+                value={formData.rolesResponsibilities}
+                onChange={handleChange}
+                rows="3"
+                placeholder="List the key responsibilities..."
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="eligibility">Eligibility</label>
+              <textarea
+                id="eligibility"
+                name="eligibility"
+                value={formData.eligibility}
+                onChange={handleChange}
+                rows="3"
+                placeholder="Required qualifications and skills..."
               />
             </div>
           </div>

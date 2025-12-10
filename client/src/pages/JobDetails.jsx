@@ -127,6 +127,20 @@ const JobDetails = () => {
               </div>
             )}
 
+            {data.rolesResponsibilities && (
+              <div className="job-section">
+                <h3>Roles & Responsibilities</h3>
+                <p>{data.rolesResponsibilities}</p>
+              </div>
+            )}
+
+            {data.eligibility && (
+              <div className="job-section">
+                <h3>Eligibility</h3>
+                <p>{data.eligibility}</p>
+              </div>
+            )}
+
             <div className="job-section">
               <h3>Contact Information</h3>
               <div className="contact-details">

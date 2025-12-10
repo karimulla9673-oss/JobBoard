@@ -112,11 +112,7 @@ const Home = () => {
         )}
       </main>
 
-      <footer className="footer">
-        <div className="container">
-          <p>&copy; 2024 Job Board. All rights reserved.</p>
-        </div>
-      </footer>
+    
     </div>
   );
 };

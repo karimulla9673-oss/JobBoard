@@ -25,6 +25,8 @@ const UploadJob = () => {
     contactNumber: '',
     applyLink: '',
     description: '',
+    rolesResponsibilities: '',
+    eligibility: '',
     postedDate: new Date().toISOString().split('T')[0],
   });
 
@@ -82,6 +84,8 @@ const UploadJob = () => {
           contactNumber: extractedDetails.contactNumber || '',
           applyLink: extractedDetails.applyLink || '',
           description: extractedDetails.description || '',
+          rolesResponsibilities: extractedDetails.rolesResponsibilities || '',
+          eligibility: extractedDetails.eligibility || '',
         }));
 
         setShowForm(true);
@@ -159,6 +163,8 @@ const UploadJob = () => {
       contactNumber: '',
       applyLink: '',
       description: '',
+      rolesResponsibilities: '',
+      eligibility: '',
       postedDate: new Date().toISOString().split('T')[0],
     });
   };
@@ -336,6 +342,30 @@ const UploadJob = () => {
                     onChange={handleInputChange}
                     rows="4"
                     placeholder="Brief job description..."
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="rolesResponsibilities">Roles & Responsibilities</label>
+                  <textarea
+                    id="rolesResponsibilities"
+                    name="rolesResponsibilities"
+                    value={formData.rolesResponsibilities}
+                    onChange={handleInputChange}
+                    rows="4"
+                    placeholder="List the key responsibilities..."
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="eligibility">Eligibility</label>
+                  <textarea
+                    id="eligibility"
+                    name="eligibility"
+                    value={formData.eligibility}
+                    onChange={handleInputChange}
+                    rows="4"
+                    placeholder="Required qualifications and skills..."
                   />
                 </div>
 
