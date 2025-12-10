@@ -5,7 +5,9 @@ export default defineConfig({
   plugins: [react()],
   build: {
     outDir: 'dist',
-    sourcemap: false,
+    // Enable source maps temporarily to get readable stack traces
+    // during production debugging on Render. Disable once issue is fixed.
+    sourcemap: true,
   },
   server: {
     port: 5173,
