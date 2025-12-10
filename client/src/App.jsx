@@ -1,6 +1,6 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { HelmetProvider } from 'react-helmet-async';
+import { Toaster } from 'react-hot-toast';
 import Home from './pages/Home';
 import JobDetails from './pages/JobDetails';
 import About from './pages/About';
@@ -23,25 +23,25 @@ const queryClient = new QueryClient({
 
 function App() {
   return (
-    <HelmetProvider>
-      <QueryClientProvider client={queryClient}>
-        <Router>
-          <Navbar />
-
+    <QueryClientProvider client={queryClient}>
+      <div className="min-h-screen flex flex-col">
+        <Navbar />
+        <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<Terms />} />
-            <Route path="/contact" element={<Contact />} />
+            <Route path="/jobs" element={<Home />} />
             <Route path="/jobs/:id/:slug?" element={<JobDetails />} />
             <Route path="*" element={<Home />} />
           </Routes>
-
-          <Footer />
-        </Router>
-      </QueryClientProvider>
-    </HelmetProvider>
+        </main>
+        <Footer />
+      </div>
+      <Toaster />
+    </QueryClientProvider>
   );
 }
 
