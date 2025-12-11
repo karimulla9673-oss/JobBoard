@@ -15,6 +15,9 @@ export default defineConfig({
   },
 
   build: {
-    outDir: 'dist'
+    outDir: 'dist',
+    // Temporarily enable source maps to help debug production runtime errors
+    // (set to false or remove before final production deploy).
+    sourcemap: true
   }
 });
