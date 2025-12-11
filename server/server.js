@@ -30,37 +30,16 @@ app.use(securityHeaders);
 app.use(sanitizeData);
 
 // CORS configuration
-// Allow specific origins from env or Render subdomains. Use a function
-// so we can accept multiple deployed client hostnames (Render uses unique subdomains).
-const allowedOrigins = new Set([
-  process.env.CLIENT_URL,
-  process.env.ADMIN_URL,
-  'https://jobboardowner.onrender.com'
-].filter(Boolean));
-
 const corsOptions = {
-  origin: (origin, callback) => {
-    // Allow requests with no origin (like mobile apps or curl)
-    if (!origin) return callback(null, true);
-
-    // Allow explicit origins in the set
-    if (allowedOrigins.has(origin)) return callback(null, true);
-
-    // Allow any Render static site subdomain (ends with .onrender.com)
-    try {
-      const url = new URL(origin);
-      if (/\.onrender\.com$/.test(url.hostname)) return callback(null, true);
-    } catch (err) {
-      // fall through to rejection
-    }
-
-    // Otherwise reject
-    return callback(new Error('Not allowed by CORS'));
-  },
+  origin: [
+    process.env.CLIENT_URL,
+    process.env.ADMIN_URL,
+    'https://jobboard-client-egew.onrender.com',
+    'https://jobboardowner.onrender.com'
+  ],
   credentials: true,
   optionsSuccessStatus: 200
 };
-
 app.use(cors(corsOptions));
 
 // Body parser middleware
