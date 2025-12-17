@@ -1,0 +1,6 @@
+[
+  {
+    "source": "^/(?!assets/|robots\\.txt|_redirects$)",
+    "destination": "/index.html"
+  }
+]

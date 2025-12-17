@@ -1,0 +1,16 @@
+services:
+  - type: static
+    name: jobboard-client
+    buildCommand: cd client && npm install && npm run build
+    staticPublishPath: client/dist
+    routes:
+      - path: /*
+        destination: /index.html
+  
+  - type: static
+    name: jobboard-admin
+    buildCommand: cd admin && npm install && npm run build
+    staticPublishPath: admin/dist
+    routes:
+      - path: /*
+        destination: /index.html
